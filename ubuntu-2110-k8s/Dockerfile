@@ -20,6 +20,7 @@ RUN apt-get -y install curl
 RUN apt-get -y install ca-certificates
 RUN apt-get -y install gnupg
 RUN apt-get -y install lsb-release
+RUN apt-get -y install bat
 
 # Add vagrant user and key for SSH
 RUN useradd --create-home -s /bin/bash vagrant
@@ -43,7 +44,7 @@ RUN /usr/sbin/sshd
 ENV DOCKER_BUILDKIT=1
 
 # Options
-ARG INSTALL_ZSH="true"
+ARG INSTALL_ZSH="false"
 ARG UPGRADE_PACKAGES="false"
 ARG USE_MOBY="false"
 ARG USERNAME=vagrant
@@ -57,6 +58,10 @@ RUN apt-get update && /bin/bash /tmp/library-scripts/common-debian.sh "${INSTALL
     && mkdir -p /home/${USERNAME}/.minikube \
     && chown ${USERNAME} /home/${USERNAME}/.minikube \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts/
+
+# For bat command
+RUN mkdir -p ~/.local/bin
+RUN ln -s /usr/bin/batcat ~/.local/bin/bat
 
 VOLUME [ "/var/lib/docker" ]
 
