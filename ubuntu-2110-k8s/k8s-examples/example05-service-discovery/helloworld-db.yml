@@ -17,7 +17,7 @@ spec:
         image: wardviaene/k8s-demo
         command: ["node", "index-db.js"]
         ports:
-        - name: helloworld-ports
+        - name: nodejs-ports
           containerPort: 3000
         env:
           - name: MYSQL_HOST
