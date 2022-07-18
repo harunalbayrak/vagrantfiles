@@ -3,42 +3,34 @@ ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # Define VMs with static private IP addresses, vcpu, memory and vagrant-box.
-  boxes = [
-    {
-      	:name => "host1", # Host1 this is one of the target nodes
-      	:ram => 1024,             # Allocated memory
-      	:vcpu => 1,               # Allocated CPU
-      	:ip => "192.168.29.2"     # Allocated IP address of the node
-    },
-    {
-      	:name => "host2", # Host2
-      	:ram => 1024,
-      	:vcpu => 1,
-      	:ip => "192.168.29.3"
-    },
-    {
-		:name => "host3", # Host3
-		:ram => 1024,
-		:vcpu => 1,
-		:ip => "192.168.29.4"
-	}
-  ]
+	boxes = [
+		{
+			:name => "host1",
+			:ip => "192.168.29.50"
+		},
+		{
+			:name => "host2",
+			:ip => "192.168.29.51"
+		},
+		{
+			:name => "host3",
+			:ip => "192.168.29.52"
+		}
+	]
 
-  # Provision each of the VMs.
-  boxes.each do |opts|
-    config.vm.define opts[:name] do |config|
-      config.vm.hostname = opts[:name]
-      config.vm.provider "docker" do |docker, override| #  Defines the vagrant provider
-      	override.vm.box = nil
-      	docker.build_dir = "."
-      	#docker.image = "rofrano/vagrant-provider:ubuntu"
-      	#override.ssh.insert_key = true
-      	docker.has_ssh = true
-      	docker.privileged = true
-        docker.create_args = ['--cpuset-cpus=1']
-    	docker.create_args = ['--memory=2g']
-      end
-    end
-  end
+	boxes.each do |opts|
+		config.vm.define opts[:name] do |config|
+			config.vm.hostname = opts[:name]
+			config.vm.provider "docker" do |docker, override|
+			override.vm.box = nil
+			docker.build_dir = "."
+			#docker.image = "rofrano/vagrant-provider:ubuntu"
+			#override.ssh.insert_key = true
+			docker.has_ssh = true
+			docker.privileged = true
+			docker.create_args = ['--cpuset-cpus=1']
+			docker.create_args = ['--memory=2g']
+			end
+		end
+	end
 end
