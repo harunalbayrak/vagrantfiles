@@ -21,15 +21,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	boxes.each do |opts|
 		config.vm.define opts[:name] do |config|
 			config.vm.hostname = opts[:name]
+			# config.vm.network :private_network, ip: opts[:ip]
+			# config.ssh.host = opts[:ip]
 			config.vm.provider "docker" do |docker, override|
-			override.vm.box = nil
-			docker.build_dir = "."
-			#docker.image = "rofrano/vagrant-provider:ubuntu"
-			#override.ssh.insert_key = true
-			docker.has_ssh = true
-			docker.privileged = true
-			docker.create_args = ['--cpuset-cpus=1']
-			docker.create_args = ['--memory=2g']
+				override.vm.box = nil
+				docker.build_dir = "."
+				# docker.image = "rofrano/vagrant-provider:ubuntu"
+				# override.ssh.insert_key = true
+				docker.has_ssh = true
+				docker.privileged = true
+				docker.create_args = ['--cpuset-cpus=1']
+				docker.create_args = ['--memory=2g']
 			end
 		end
 	end

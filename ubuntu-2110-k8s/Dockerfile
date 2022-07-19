@@ -21,6 +21,7 @@ RUN apt-get -y install ca-certificates
 RUN apt-get -y install gnupg
 RUN apt-get -y install lsb-release
 RUN apt-get -y install bat
+RUN apt-get -y install micro
 
 # Add vagrant user and key for SSH
 RUN useradd --create-home -s /bin/bash vagrant

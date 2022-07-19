@@ -17,6 +17,7 @@ RUN apt-get install -y --no-install-recommends ssh sudo libffi-dev systemd opens
 RUN apt-get -y install puppet
 RUN apt-get -y install neofetch
 RUN apt-get -y install curl
+RUN apt-get -y install net-tools
 
 # Add vagrant user and key for SSH
 RUN useradd --create-home -s /bin/bash vagrant
