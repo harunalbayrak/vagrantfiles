@@ -3,7 +3,7 @@
 # Adds Puppet, SSH daemon, Systemd
 # Adapted from https://github.com/BashtonLtd/docker-vagrant-images/blob/master/ubuntu1404/Dockerfile
 
-FROM ubuntu:21.10
+FROM ubuntu:20.04
 ENV container docker
 RUN apt-get update -y && apt-get dist-upgrade -y
 
@@ -18,6 +18,8 @@ RUN apt-get -y install puppet
 RUN apt-get -y install neofetch
 RUN apt-get -y install curl
 RUN apt-get -y install net-tools
+RUN apt-get -y install git
+# RUN apt-get -y install iputils-ping
 
 # Add vagrant user and key for SSH
 RUN useradd --create-home -s /bin/bash vagrant
