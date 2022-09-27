@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 				# override.ssh.insert_key = true
 				docker.has_ssh = true
 				docker.privileged = true
-				docker.create_args = ['--cpuset-cpus=1']
+				docker.create_args = ['--cpuset-cpus=2']
 				docker.create_args = ['--memory=2g']
 			end
 		end
